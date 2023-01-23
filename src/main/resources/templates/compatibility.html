@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
     <title>Document</title>
-</head>
-<body data-th-object="${person}">
-        <div class="container">
-            <p data-th-text="*{fname}"></p>
-            </br>
-            <p data-th-text="*{sname}"></p>
-            </br>
-            <p data-th-text="*{percentage}"></p>
-            </br>
-            <p data-th-text="*{result}"></p>
-            </br>
-        </div>
-</body>
+  </head>
+  <body data-th-object="${person}">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Second Name</th>
+        <th>Percentage</th>
+        <th>Result</th>
+      </tr>
+      <tr>
+        <td data-th-text="*{id}"></td>
+        <td data-th-text="*{fname}"></td>
+        <td data-th-text="*{sname}"></td>
+        <td data-th-text="*{percentage}"></td>
+        <td data-th-text="*{result}"></td>
+      </tr>
+    </table>
+  </body>
 </html>
