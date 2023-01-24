@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.loveCalculator.model.Person;
-
+@Qualifier("LoveCalculatorService")
 // service tasks, such as executing business logic, interacting with databases, or handling web requests 
 @Service
 public class LoveCalculatorService {
@@ -54,8 +54,10 @@ public class LoveCalculatorService {
         System.out.println(response.body());
         Person p = Person.create(response.body());
 
-        if (p != null)
-            return Optional.of(p);
+        if (p != null) {
+        save(p);
+        return Optional.of(p);
+        }
         return Optional.empty();
     }
 

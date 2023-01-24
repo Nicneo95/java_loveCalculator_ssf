@@ -10,6 +10,8 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
@@ -56,10 +58,14 @@ public class RedisConfig {
         redisTemplate.setConnectionFactory(jedisFac);
 
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        // set the map key/value serialization type to String
-        redisTemplate.setHashKeySerializer(redisTemplate.getKeySerializer());
-        redisTemplate.setValueSerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+         // set the map key/value serialization type to String
+         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+         // enable redis to store java object on the value column
+         RedisSerializer<Object> objSerializer 
+                 = new JdkSerializationRedisSerializer(getClass().getClassLoader());
+ 
+         redisTemplate.setValueSerializer(objSerializer);
+         redisTemplate.setHashValueSerializer(objSerializer);
 
         return redisTemplate;
     }

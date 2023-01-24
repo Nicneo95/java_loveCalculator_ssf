@@ -94,7 +94,6 @@ public class Person implements Serializable {
             } else {
                 p.setCompatibility("not compatible!");
             }
-
         }
         // return an instance of the object 'p' with the fields populated with values from the JSON data
         return p;
